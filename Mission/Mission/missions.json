@@ -1,0 +1,173 @@
+[
+  {
+    "id": 1,
+    "launchDate": "1968-12-21T00:00:00Z",
+    "crew": [
+      {
+        "name": "borman",
+        "role": "Commander"
+      },
+      {
+        "name": "lovell",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "anders",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 8 was the first crewed spacecraft to leave low Earth orbit and travel to the Moon. The crew entered lunar orbit and became the first humans to see the far side of the Moon."
+  },
+  {
+    "id": 2,
+    "launchDate": "1969-05-18T00:00:00Z",
+    "crew": [
+      {
+        "name": "stafford",
+        "role": "Commander"
+      },
+      {
+        "name": "young",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "cernan",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 10 was the final rehearsal for the first Moon landing. The crew tested the lunar module in lunar orbit and came within a few miles of the lunar surface."
+  },
+  {
+    "id": 3,
+    "launchDate": "1969-07-16T00:00:00Z",
+    "crew": [
+      {
+        "name": "armstrong",
+        "role": "Commander"
+      },
+      {
+        "name": "aldrin",
+        "role": "Lunar Module Pilot"
+      },
+      {
+        "name": "collins",
+        "role": "Command Module Pilot"
+      }
+    ],
+    "description": "Apollo 11 was the first crewed mission to land humans on the Moon. Neil Armstrong and Buzz Aldrin walked on the lunar surface while Michael Collins remained in lunar orbit."
+  },
+  {
+    "id": 6,
+    "launchDate": "1969-11-14T00:00:00Z",
+    "crew": [
+      {
+        "name": "conrad",
+        "role": "Commander"
+      },
+      {
+        "name": "gordon",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "bean",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 12 was the second crewed mission to land on the Moon. The crew made a precise landing near the Surveyor 3 spacecraft."
+  },
+  {
+    "id": 4,
+    "launchDate": "1970-04-11T00:00:00Z",
+    "crew": [
+      {
+        "name": "lovell",
+        "role": "Commander"
+      },
+      {
+        "name": "swigert",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "haise",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 13 suffered an oxygen tank explosion during its journey to the Moon. The crew used the lunar module as a lifeboat and safely returned to Earth."
+  },
+  {
+    "id": 5,
+    "launchDate": "1971-01-31T00:00:00Z",
+    "crew": [
+      {
+        "name": "shepard",
+        "role": "Commander"
+      },
+      {
+        "name": "roosa",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "mitchell",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 14 was the third successful lunar landing mission. The crew conducted scientific experiments and collected samples from the lunar surface."
+  },
+  {
+    "id": 6,
+    "launchDate": "1971-07-26T00:00:00Z",
+    "crew": [
+      {
+        "name": "scott",
+        "role": "Commander"
+      },
+      {
+        "name": "worden",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "irwin",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 15 focused heavily on lunar science and exploration. The crew used the lunar rover to travel farther across the Moon's surface."
+  },
+  {
+    "id": 16,
+    "launchDate": "1972-04-16T00:00:00Z",
+    "crew": [
+      {
+        "name": "mattingly",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "young",
+        "role": "Commander"
+      },
+      {
+        "name": "duke",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 16 explored the lunar highlands and collected geological samples. The crew spent several days working on the lunar surface."
+  },
+  {
+    "id": 17,
+    "launchDate": "1972-12-07T00:00:00Z",
+    "crew": [
+      {
+        "name": "cernan",
+        "role": "Commander"
+      },
+      {
+        "name": "evans",
+        "role": "Command Module Pilot"
+      },
+      {
+        "name": "schmitt",
+        "role": "Lunar Module Pilot"
+      }
+    ],
+    "description": "Apollo 17 was the final Apollo mission to land humans on the Moon. The crew conducted extensive geological research and collected a large number of lunar samples."
+  }
+]

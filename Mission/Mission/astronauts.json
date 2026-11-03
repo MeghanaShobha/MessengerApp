@@ -1,0 +1,122 @@
+{
+  "borman": {
+    "id": "borman",
+    "name": "Frank Borman",
+    "description": "Frank Borman was an American astronaut and commander of Apollo 8, the first crewed mission to orbit the Moon."
+  },
+  "lovell": {
+    "id": "lovell",
+    "name": "Jim Lovell",
+    "description": "Jim Lovell was an American astronaut who flew on Apollo 8, Apollo 13, and several other space missions."
+  },
+  "anders": {
+    "id": "anders",
+    "name": "William Anders",
+    "description": "William Anders was an American astronaut and lunar module pilot on Apollo 8."
+  },
+  "stafford": {
+    "id": "stafford",
+    "name": "Thomas Stafford",
+    "description": "Thomas Stafford was an American astronaut who commanded Apollo 10 and helped prepare for the first Moon landing."
+  },
+  "young": {
+    "id": "young",
+    "name": "John Young",
+    "description": "John Young was an American astronaut who flew on several space missions and commanded Apollo 16."
+  },
+  "cernan": {
+    "id": "cernan",
+    "name": "Eugene Cernan",
+    "description": "Eugene Cernan was an American astronaut who commanded Apollo 17 and was the final person to walk on the Moon during the Apollo era."
+  },
+  "armstrong": {
+    "id": "armstrong",
+    "name": "Neil Armstrong",
+    "description": "Neil Armstrong was an American astronaut and commander of Apollo 11. He was the first human to walk on the Moon."
+  },
+  "aldrin": {
+    "id": "aldrin",
+    "name": "Buzz Aldrin",
+    "description": "Buzz Aldrin was an American astronaut and lunar module pilot on Apollo 11. He was the second person to walk on the Moon."
+  },
+  "collins": {
+    "id": "collins",
+    "name": "Michael Collins",
+    "description": "Michael Collins was an American astronaut who served as command module pilot for Apollo 11 and remained in lunar orbit while Armstrong and Aldrin explored the Moon."
+  },
+  "conrad": {
+    "id": "conrad",
+    "name": "Pete Conrad",
+    "description": "Pete Conrad was an American astronaut and commander of Apollo 12, the second mission to land humans on the Moon."
+  },
+  "gordon": {
+    "id": "gordon",
+    "name": "Richard Gordon",
+    "description": "Richard Gordon was an American astronaut who served as command module pilot on Apollo 12."
+  },
+  "bean": {
+    "id": "bean",
+    "name": "Alan Bean",
+    "description": "Alan Bean was an American astronaut and lunar module pilot on Apollo 12."
+  },
+  "swigert": {
+    "id": "swigert",
+    "name": "Jack Swigert",
+    "description": "Jack Swigert was an American astronaut who served as command module pilot on Apollo 13."
+  },
+  "haise": {
+    "id": "haise",
+    "name": "Fred Haise",
+    "description": "Fred Haise was an American astronaut and lunar module pilot on Apollo 13."
+  },
+  "shepard": {
+    "id": "shepard",
+    "name": "Alan Shepard",
+    "description": "Alan Shepard was an American astronaut and commander of Apollo 14."
+  },
+  "roosa": {
+    "id": "roosa",
+    "name": "Stuart Roosa",
+    "description": "Stuart Roosa was an American astronaut and command module pilot on Apollo 14."
+  },
+  "mitchell": {
+    "id": "mitchell",
+    "name": "Edgar Mitchell",
+    "description": "Edgar Mitchell was an American astronaut and lunar module pilot on Apollo 14."
+  },
+  "scott": {
+    "id": "scott",
+    "name": "David Scott",
+    "description": "David Scott was an American astronaut and commander of Apollo 15."
+  },
+  "worden": {
+    "id": "worden",
+    "name": "Alfred Worden",
+    "description": "Alfred Worden was an American astronaut and command module pilot on Apollo 15."
+  },
+  "irwin": {
+    "id": "irwin",
+    "name": "James Irwin",
+    "description": "James Irwin was an American astronaut and lunar module pilot on Apollo 15."
+  },
+  "mattingly": {
+    "id": "mattingly",
+    "name": "Thomas Mattingly",
+    "description": "Thomas Mattingly was an American astronaut who served as command module pilot on Apollo 16."
+  },
+  "duke": {
+    "id": "duke",
+    "name": "Charles Duke",
+    "description": "Charles Duke was an American astronaut and lunar module pilot on Apollo 16."
+  },
+  "evans": {
+    "id": "evans",
+    "name": "Ronald Evans",
+    "description": "Ronald Evans was an American astronaut and command module pilot on Apollo 17."
+  },
+  "schmitt": {
+    "id": "schmitt",
+    "name": "Harrison Schmitt",
+    "description": "Harrison Schmitt was an American astronaut and lunar module pilot on Apollo 17."
+  }
+}

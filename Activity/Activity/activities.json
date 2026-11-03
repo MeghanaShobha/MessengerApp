@@ -1,0 +1,26 @@
+[
+    {
+        "id": "A1B2C3D4-E5F6-7890-ABCD-123456789001",
+        "title": "Learn Swift",
+        "description": "Practice Swift and SwiftUI for 30 minutes every day.",
+        "completionCount": 5
+    },
+    {
+        "id": "A1B2C3D4-E5F6-7890-ABCD-123456789002",
+        "title": "Exercise",
+        "description": "Exercise for at least 30 minutes.",
+        "completionCount": 8
+    },
+    {
+        "id": "A1B2C3D4-E5F6-7890-ABCD-123456789003",
+        "title": "Read Book",
+        "description": "Read at least 10 pages every day.",
+        "completionCount": 12
+    },
+    {
+        "id": "A1B2C3D4-E5F6-7890-ABCD-123456789004",
+        "title": "Practice Guitar",
+        "description": "Practice guitar for 20 minutes.",
+        "completionCount": 4
+    }
+]
