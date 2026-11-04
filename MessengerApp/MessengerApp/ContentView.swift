@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showHome = false
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group{
+            if showHome {
+                LoginView(){
+                    print("logout is done")
+                    showHome  = false
+                }
+            }else{
+                SplashView()
+                    .onAppear(){
+                        withAnimation {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                showHome = true
+                            }
+                        }
+                      
+                    }
+            }
         }
-        .padding()
+       
     }
 }
 
