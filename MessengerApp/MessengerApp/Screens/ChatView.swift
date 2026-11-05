@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ChatView: View {
     @ObservedObject var chatService: ChatSocketService
+    let peerName : String
     @State private var messageText = ""
+    @State private var messageToEdit: ChatMessage?
+    @State private var editedText = ""
+//    @State private var secondPerson = ""
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -17,11 +21,12 @@ struct ChatView: View {
                     .font(.largeTitle)
                     .foregroundStyle(.blue)
                 VStack(alignment: .leading) {
-                    Text("Yashu")
+                    Text(chatService.nextPerson[0])
                         .font(.title)
                     Text(chatService.peerIsOnline ? "Online" : "Offline")
                         .font(.caption)
                         .foregroundStyle(chatService.peerIsOnline ? .green : .gray)
+                    Text(chatService.isType  ? "typing" : "")
                 }
                 Spacer()
                 Circle()
@@ -35,7 +40,10 @@ struct ChatView: View {
                 ScrollView {
                     LazyVStack(spacing: 15) {
                         ForEach(chatService.messages, id: \.id) { message in
+                            
                             HStack {
+                                
+                                
                                 if message.isMe {
                                     Spacer(minLength: 50)
                                 }
@@ -51,6 +59,16 @@ struct ChatView: View {
                                         .clipShape(
                                             RoundedRectangle(cornerRadius: 12)
                                         )
+                                        .contextMenu {
+                                                if message.isMe {
+                                                    Button {
+                                                        editedText = message.content
+                                                        messageToEdit = message
+                                                    } label: {
+                                                        Label("Edit", systemImage: "pencil")
+                                                    }
+                                                }
+                                            }
 
                                     HStack(spacing: 5) {
                                         Text(
@@ -79,6 +97,28 @@ struct ChatView: View {
                         }
                     }
                     .padding(.vertical)
+                    .sheet(item: $messageToEdit){message in
+                        NavigationStack{
+                            Form{
+                                TextField("Edit message",text:$editedText)
+                                    .onChange(of: editedText) { oldValue, newValue in
+                                            print("Old message:", oldValue)
+                                            print("New message:", newValue)
+                                        }
+                            }
+                            .navigationTitle(Text("Edit message"))
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button("Cancel") {
+                                        messageToEdit = nil
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                        
+                    }
                 }
                 .onChange(of: chatService.messages.count) { _, _ in
                     if let lastMessage = chatService.messages.last {
@@ -93,8 +133,15 @@ struct ChatView: View {
             HStack {
                 TextField("Message", text: $messageText)
                     .textFieldStyle(.roundedBorder)
+                    .onChange(of: messageText) {
+                        if messageText != "" {
+                            chatService.typing(isType: true)
+                        }
+                    }
                 Button {
                     sendMessage()
+//                    chatService.sendMessage(text)
+                    
                 } label: {
                     Image(systemName: "paperplane.fill")
                         .foregroundStyle(.white)
@@ -110,6 +157,12 @@ struct ChatView: View {
             }
             .padding()
         }
+        .onAppear {
+            chatService.presentinChatScreen(val: true)
+        }
+        .onDisappear {
+            chatService.presentinChatScreen(val: false)
+        }
     }
 
     func sendMessage() {
@@ -117,11 +170,12 @@ struct ChatView: View {
             in: .whitespacesAndNewlines
         )
         guard !text.isEmpty else { return }
-        chatService.sendMessage(text)
+        chatService.sendMessage(message: text)
         messageText = ""
+        chatService.typing(isType: false)
     }
 }
 
 #Preview {
-    ChatView(chatService: ChatSocketService())
+    ChatView(chatService: ChatSocketService(),peerName: "Yashu")
 }

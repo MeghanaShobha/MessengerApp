@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
        ZStack {
-            Color.pink
+            Color.white
                .ignoresSafeArea(edges: .all)
            VStack(spacing:15){
                AsyncImage(url: URL(string: "https://img.magnific.com/free-photo/closeup-shot-beautiful-butterfly-orange-petaled-flower_181624-13884.jpg?semt=ais_hybrid&w=740&q=80"))

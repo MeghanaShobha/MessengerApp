@@ -11,6 +11,7 @@ import Combine
 struct HomeView: View {
     @ObservedObject var chatService: ChatSocketService
     var isShowLogin: () -> Void
+    let peerName: String
     var body: some View {
         ZStack{
             TabView{
@@ -26,7 +27,7 @@ struct HomeView: View {
                             Label("Home", systemImage: "house")
                         }
                 
-                ChatView(chatService: ChatSocketService())
+                ChatView(chatService: /*ChatSocketService()*/chatService,peerName: peerName)
                     .tabItem{
                         Label("Chat", systemImage: "bubble.right")
                     }
@@ -60,6 +61,7 @@ struct HomeView: View {
 #Preview {
     HomeView(
         chatService: ChatSocketService(),
-        isShowLogin: {}
+        isShowLogin: {},
+        peerName: "Yashu"
     )
 }

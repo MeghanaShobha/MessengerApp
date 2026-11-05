@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @State private var peerName = ""
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
@@ -56,20 +57,32 @@ struct LoginView: View {
             }
             .padding(30)
             .navigationDestination(isPresented: $showHome) {
-                HomeView(chatService: ChatSocketService()){
+                HomeView(chatService: chatService,isShowLogin: {
                     isShowLogin()
-                }
+                },
+                peerName: peerName
+            )
             }
         }
     }
     func loginUser() {
-        if email == correctEmail && password == correctPassword {
-            chatService.connect()
-            errorMessage = ""
-            showHome = true
-        } else {
-            errorMessage = "Invalid email or password"
+        let userEmail = email.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        let userPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard !userEmail.isEmpty && !password.isEmpty else {
+            errorMessage = "Please enter email and password"
+            return
         }
+        if userEmail == ""{
+            peerName = ""
+        }else{
+            peerName = ""
+        }
+        
+        errorMessage = ""
+        chatService.connect(userId: userEmail)
+        showHome = true
     }
 }
 
