@@ -27,7 +27,7 @@ struct HomeView: View {
                             Label("Home", systemImage: "house")
                         }
                 
-                ChatView(chatService: /*ChatSocketService()*/chatService,peerName: peerName)
+                ChatView(chatService: chatService, peerName: peerName)
                     .tabItem{
                         Label("Chat", systemImage: "bubble.right")
                     }
@@ -62,6 +62,6 @@ struct HomeView: View {
     HomeView(
         chatService: ChatSocketService(),
         isShowLogin: {},
-        peerName: "Yashu"
+        peerName: ""
     )
 }

@@ -24,14 +24,16 @@ final class ChatSocketService: ObservableObject{
     @Published var isConnected = false
     @Published var peerIsOnline = false
     @Published var secondPerson:String = ""
-    @Published var nextPerson: [String] = [" "]
+    @Published var nextPerson: [String] = []
     @Published var isType = false
+    private var seenMessageIDs = Set<Int>()
     private var manager :SocketManager!
     private var socket:SocketIOClient!
-
+    
+    
     init(){
         manager = SocketManager(
-            socketURL:  URL(string: "https://bf00-106-51-65-110.ngrok-free.app")!,
+            socketURL:  URL(string: "https://0f40-111-92-91-96.ngrok-free.app")!,
             config: [.log(true),.compress]
         )
         socket = manager.defaultSocket
@@ -50,6 +52,7 @@ final class ChatSocketService: ObservableObject{
             }
         }
         
+        
         socket.on(clientEvent: .disconnect){
             [weak self] Data, ack in
             DispatchQueue.main.async{
@@ -58,34 +61,24 @@ final class ChatSocketService: ObservableObject{
             }
         }
         
-        socket.on("message") { [weak self] data,ack in
-            guard let self, let message = self.decodes(ChatMessage.self, from: data) else { return }
-            self.messages.append(message)
-//            if message[0]
-            print("message-",messages)
-            for i in messages {
-                if !i.isMe  {
-                    secondPerson = i.name
-                    break
+        socket.on("message") { [weak self] data, ack in
+            guard let self,
+                  let message = self.decodes(ChatMessage.self, from: data) else {
+                print("Message decoding failed:", data)
+                return
+            }
+            DispatchQueue.main.async {
+                self.messages.append(message)
+                print("Received message:", message)
+                if !message.isMe {
+                    self.secondPerson = message.name
                 }
             }
         }
         
-        
-        socket.on("seen"){[weak self]data,ack in
-            guard let self,
-                  let id = data.first as? Int else {
-                print("Invalid seen message ID")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                guard let index = self.messages.firstIndex(where: { $0.id == id }) else {
-                    return
-                }
-                self.messages[index].seen = true
-                print("message\(id) is seen")
-            }
+        socket.on("seen") { [weak self] data, _ in
+        guard let self, data.first as? Bool == true else { return }
+        for i in messages.indices where messages[i].isMe { messages[i].seen = true }
         }
         
         socket.on("user:online") { [weak self] data, ack in
@@ -94,37 +87,35 @@ final class ChatSocketService: ObservableObject{
             }
         }
         
-        socket.on("user:offline "){[weak self] data, ack in
+        socket.on("user:offline"){[weak self] data, ack in
             DispatchQueue.main.async {
                 self?.peerIsOnline = false
             }
         }
         
-//        socket.on("online:names"){[weak self] data, ack in
-//            DispatchQueue.main.async{
-//                self?.nextPerson = data.first as? [String] ?? []
-//            }
-//            print("another name",self?.nextPerson)
-//            
-////            print("ee",self?.nextPerson ?? "ntg in array")
-//
-//        }
-        socket.on("typing"){[weak self] data,ack in
-            
-            self?.isType = true
-            
+        socket.on("typing") { [weak self] data, ack in
+            guard let info = data.first as? [String: Any] else {
+                return
+            }
+            guard let isTyping = info["isTyping"] as? Bool else {
+                return
+            }
+            DispatchQueue.main.async {
+                self?.isType = isTyping
+            }
         }
         
         socket.on("online:names") { [weak self] data,ack in
-                    self?.nextPerson = data.first as? [String] ?? []
-                    print("online:names ->", data, "| otherNames:", self?.nextPerson ?? [])
-                }
-//
+            self?.nextPerson = data.first as? [String] ?? []
+            print("online:names ->", data, "| otherNames:", self?.nextPerson ?? [])
+        }
+        
         
     }
-            
-            
-
+    
+    
+    
+    
     
     func connect(userId: String) {
         socket.connect(withPayload:["userId": userId])
@@ -144,17 +135,30 @@ final class ChatSocketService: ObservableObject{
         socket.emit(event,item)
     }
     func decodes<T: Decodable>(_ type: T.Type, from data: [Any]) -> T? {
-            guard let json = data.first,
-                  let bytes = try? JSONSerialization.data(withJSONObject: json) else { return nil }
-            return try? JSONDecoder().decode(T.self, from: bytes)
-        }
+        guard let json = data.first,
+              let bytes = try? JSONSerialization.data(withJSONObject: json) else { return nil }
+        return try? JSONDecoder().decode(T.self, from: bytes)
+    }
     func presentinChatScreen(val : Bool){
         emit("present",item: val)
         socket.emit("online:names")
     }
+//    func markMessageAsSeen(messageId: Int) {
+//        guard !seenMessageIDs.contains(messageId) else { return }
+//        seenMessageIDs.insert(messageId)
+//        socket.emit("seen", true)
+//        print(messageId)
+//        print("Seen event emitted:", messageId)
+//    }
     
+    func markMessageAsSeen() { socket.emit("seen", true) } // guard aur seenMessageIDs hata do
+//    .onAppear {
+//    chatService.presentinChatScreen(val: true)
+//    chatService.markMessageAsSeen() // har baar chat khulne par
+//    }
     
 }
+
 
 //#Preview {
 //    ChatSocketService()

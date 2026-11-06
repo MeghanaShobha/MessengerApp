@@ -57,11 +57,13 @@ struct LoginView: View {
             }
             .padding(30)
             .navigationDestination(isPresented: $showHome) {
-                HomeView(chatService: chatService,isShowLogin: {
-                    isShowLogin()
-                },
-                peerName: peerName
-            )
+                HomeView(
+                    chatService: chatService,
+                    isShowLogin: {
+                        showHome = false
+                    },
+                    peerName: peerName
+                )
             }
         }
     }
@@ -74,12 +76,12 @@ struct LoginView: View {
             errorMessage = "Please enter email and password"
             return
         }
-        if userEmail == ""{
+       if userEmail == ""{
             peerName = ""
-        }else{
+       }else{
             peerName = ""
         }
-        
+                
         errorMessage = ""
         chatService.connect(userId: userEmail)
         showHome = true
