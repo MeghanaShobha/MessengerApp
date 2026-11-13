@@ -70,7 +70,7 @@ struct ChatView: View {
             if message.isMe {
                 Spacer(minLength: 50)
             }
-            VStack(alignment: .trailing, spacing: 5) {
+            VStack(alignment: message.isMe ? .trailing : .leading, spacing: 5) {
                 messageBubble(message)
                 messageStatus(message)
             }
@@ -79,6 +79,7 @@ struct ChatView: View {
             }
         }
         .padding(.vertical)
+        .padding(.horizontal)
         .id(message.id)
         .onAppear {
             print("Message", message)

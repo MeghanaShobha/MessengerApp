@@ -66,11 +66,18 @@ final class ChatSocketService: ObservableObject {
 
         socket.on("message") { [weak self] data, ack in
             guard let self,
-                  var message = self.decodes(MessageModel.self, from: data) else { return }
+                  var message = self.decodes(MessageModel.self, from: data)
+            else {
+                print("Message decoding failed")
+                return
+            }
             DispatchQueue.main.async {
-                message.isMe = (message.name == self.currentUserId)
+                let myName = self.currentUserId
+                    .split(separator: "@").first.map(String.init) ?? self.currentUserId
+                message.isMe = message.name.lowercased() == myName.lowercased()
                 self.messages.append(message)
                 if !message.isMe { self.secondPerson = message.name }
+                print("name:", message.name, "me:", myName, "isMe:", message.isMe)
             }
         }
         
@@ -107,7 +114,6 @@ final class ChatSocketService: ObservableObject {
                   data.first as? Bool == true else {
                 return
             }
-
             DispatchQueue.main.async {
                 for index in self.messages.indices where self.messages[index].isMe {
                     self.messages[index].seen = true
@@ -121,7 +127,7 @@ final class ChatSocketService: ObservableObject {
             DispatchQueue.main.async {
                 let others = names.filter { $0 != self.currentUserId }
                 self.nextPerson = others
-                if let first = others.first { self.secondPerson = first }  // keep last name when they go offline
+                if let first = others.first { self.secondPerson = first } 
                 self.peerOnline = !others.isEmpty
             }
         }
