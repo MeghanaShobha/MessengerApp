@@ -2,7 +2,7 @@
 //  ChatAppBasicApp.swift
 //  ChatAppBasic
 //
-//  Created by Meghana IOS on 03/11/26.
+//  Created by Meghana IOS on 11/11/26.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct ChatAppBasicApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(Services: ChatSocketService())
         }
     }
 }

@@ -9,7 +9,15 @@ import SwiftUI
 
 struct SplashView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            VStack{
+                AsyncImage(url: URL(string: "https://img.magnific.com/free-photo/courage-man-jump-through-gap-hill-business-concept-idea_1323-262.jpg?semt=ais_hybrid&w=740&q=80"))
+                    .frame(width: 200, height: 200)
+                    .clipShape(Capsule())
+                Text("App is Loading...")
+                
+            }
+        }
     }
 }
 

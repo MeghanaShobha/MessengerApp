@@ -54,7 +54,7 @@ final class ChatSocketService: ObservableObject{
         
         
         socket.on(clientEvent: .disconnect){
-            [weak self] Data, ack in
+            [weak self] data, ack in
             DispatchQueue.main.async{
                 self?.isConnected = false
                 print("Socket is disconnected")
@@ -107,7 +107,7 @@ final class ChatSocketService: ObservableObject{
         
         socket.on("online:names") { [weak self] data,ack in
             self?.nextPerson = data.first as? [String] ?? []
-            print("online:names ->", data, "| otherNames:", self?.nextPerson ?? [])
+            print("online:names ->", data, "otherNames:", self?.nextPerson ?? [])
         }
         
         
