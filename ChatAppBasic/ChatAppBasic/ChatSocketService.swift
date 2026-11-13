@@ -32,12 +32,7 @@ final class ChatSocketService: ObservableObject {
     init() {
         manager = SocketManager(
             socketURL: URL(string: "https://rethink-overlabor-excitable.ngrok-free.dev")!,
-            config: [
-                .log(true),
-                .compress,
-                .forceWebsockets(true),
-                .extraHeaders(["ngrok-skip-browser-warning": "true"])
-            ]
+            config: [.log(true),.compress]
         )
 
         socket = manager.defaultSocket
@@ -54,13 +49,9 @@ final class ChatSocketService: ObservableObject {
         }
 
         socket.on(clientEvent: .disconnect) { [weak self] data, ack in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async{
                 self?.isConnected = false
-                self?.peerOnline = false
-                self?.isType = false
-                self?.nextPerson.removeAll()
-                self?.secondPerson = ""
-                self?.messages.removeAll()
+                print("Socket is disconnected")
             }
         }
 
@@ -83,13 +74,12 @@ final class ChatSocketService: ObservableObject {
         
 
         socket.on("typing") { [weak self] data, ack in
-            guard let info = data.first as? [String: Any],
-                  let isTyping = info["isType"] as? Bool
-            else {
-                print("Typing data format is incorrect")
+            guard let info = data.first as? [String: Any] else {
                 return
             }
-
+            guard let isTyping = info["isTyping"] as? Bool else {
+                return
+            }
             DispatchQueue.main.async {
                 self?.isType = isTyping
             }
@@ -109,16 +99,9 @@ final class ChatSocketService: ObservableObject {
             }
         }
 
-        socket.on("seen") { [weak self] data, ack in
-            guard let self,
-                  data.first as? Bool == true else {
-                return
-            }
-            DispatchQueue.main.async {
-                for index in self.messages.indices where self.messages[index].isMe {
-                    self.messages[index].seen = true
-                }
-            }
+        socket.on("seen") { [weak self] data, _ in
+        guard let self, data.first as? Bool == true else { return }
+        for i in messages.indices where messages[i].isMe { messages[i].seen = true }
         }
 
         socket.on("online:names") { [weak self] data, ack in
@@ -161,7 +144,7 @@ final class ChatSocketService: ObservableObject {
         socket.emit(event, item)
     }
 
-    func typing(isType: Bool) {
+    func typing (isType : Bool) {
         emit("typing", item: isType)
     }
 

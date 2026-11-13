@@ -16,7 +16,6 @@ struct ChatView: View {
         .onAppear {
             Services.presentinChatScreen(val: true)
             Services.markMessageAsSeen()
-            print("Vstack")
         }
         .onDisappear {
             Services.presentinChatScreen(val: false)
@@ -40,10 +39,8 @@ struct ChatView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
             }
-
             Spacer()
         }
-        .padding()
     }
     
     private var messagesView: some View {
